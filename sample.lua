@@ -1,5 +1,6 @@
 local torch = require 'torch'
 local nn = require 'nn'
+local cunn = require 'cunn'
 require 'nngraph'
 local MDN = require 'mdn'
 local model = require 'model'
