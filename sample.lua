@@ -57,7 +57,9 @@ for t = 1, opt.length do
        torch.Tensor(1, x:size(3)):cuda():copy(sequence[t - 1]),
         unpack(lstm_state)
     }
-    local probs = protos.linear_out:forward(next_state[#next_state])
+    local probs = protos.linear_out:forward(next_state[#next_state]):cuda()
+    print('PROBS:')
+    print(probs)
     sequence[t] = protos.criterion:sample(probs, opt.bias):clone()
     lstm_state = next_state
 end

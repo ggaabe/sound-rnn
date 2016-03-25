@@ -146,10 +146,10 @@ function MDN:sample(input, bias)
     i = i[1][1]
     local chol = torch.potrf(
         diag:clone()
-            :cmul(vars[1][{{}, i}]:contiguous():view(1, dims):expandAs(diag))
+           :cmul(vars[1][{{}, i}]:contiguous():view(1, dims):expandAs(diag):double())
     )
     local z = rk.standard_normal(torch.Tensor(dims))
-    output:add(means[1]:select(2, i):clone():add(torch.mv(chol, z)))
+    output:add(means[1]:select(2, i):clone():add(torch.mv(chol, z):cuda()))
 
     return output
 end
