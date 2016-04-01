@@ -58,8 +58,8 @@ for t = 1, opt.length do
         unpack(lstm_state)
     }
     local probs = protos.linear_out:forward(next_state[#next_state]):cuda()
-    print('PROBS:')
-    print(probs)
+   -- print('PROBS:')
+   -- print(probs)
     sequence[t] = protos.criterion:sample(probs, opt.bias):clone()
     lstm_state = next_state
 end
